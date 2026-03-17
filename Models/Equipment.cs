@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APBD_TASK2.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,17 @@ namespace APBD_TASK2.Models
         public int Id { get; }
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
-
+        public EquipmentStatus Status { get; set; }
         public DateTime dateAdded { get; set; }
+        
+        public Equipment(string name, string description = "")
+        {
+            this.Id = _nextId++;
+            this.Name = name;
+            this.Description = description;
+            this.Status = EquipmentStatus.Available;
+            this.dateAdded = DateTime.Now;
+        }
 
     }
 }
