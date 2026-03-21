@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace APBD_TASK2.Controllers
 {
-    public class EquipmentController
+    public static class EquipmentController
     {
-        public void addEquipment(Equipment equipment)
+        public static void AddEquipment(Equipment equipment)
         {
             Singleton.Instance.EquipmentList.Add(equipment);
         }

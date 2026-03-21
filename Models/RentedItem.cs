@@ -13,7 +13,6 @@ namespace APBD_TASK2.Models
         public DateTime RentDate { get; }
         public int RentPeriod { get; set; }
         public DateTime? ReturnDate { get; set; } = null;
-        public int OverdueFee { get; set; } = 0;
 
         public RentedItem(Equipment equipment, User user, DateTime rentDate, int rentPeriod, DateTime? returnDate)
         {

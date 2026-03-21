@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace APBD_TASK2.Controllers
 {
-    public class RentedItemController
+    public static class RentedItemController
     {
-        public void addRentedItem(RentedItem rentedItem)
+        public static void AddRentedItem(RentedItem rentedItem)
         {
             if (!Singleton.Instance.UserList.Contains(rentedItem.User))
             {
@@ -21,9 +21,11 @@ namespace APBD_TASK2.Controllers
                 throw new Exception("No matching equipment found in the database");
             }
             
-            if (rentedItem.Equipment.Status == Enum.EquipmentStatus.Available)
+            if (rentedItem.Equipment.Status == Enum.EquipmentStatus.Available
+                && !UserController.RentalLimitReached(rentedItem.User.Id))
             {
-
+                Singleton.Instance.RentedItems.Add(rentedItem);
+                rentedItem.Equipment.Status = Enum.EquipmentStatus.Rented;
             }
         }
     }
