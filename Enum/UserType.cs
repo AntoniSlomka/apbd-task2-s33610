@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APBD_TASK2.Enum
 {
-    internal enum UserType
+    public enum UserType
     {
         Student = 0,
         Employee = 1

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace APBD_TASK2.Models
 {
-    internal class User
+    public class User
     {
         private static int _nextId = 1;
         public int Id { get; }

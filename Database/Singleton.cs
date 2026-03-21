@@ -10,6 +10,9 @@ namespace APBD_TASK2.Database
     public class Singleton
     {
         private static Singleton? _instance;
+        public List<Equipment> EquipmentList { get; } = new();
+        public List<RentedItem> RentedItems { get; } = new();
+        public List<User> UserList { get; } = new();
         public static Singleton Instance
         {
             get
@@ -20,9 +23,5 @@ namespace APBD_TASK2.Database
         }
 
         private Singleton() { }
-
-        //TODO: add collections for items in the exercise
-        //public List<Class> Class { get; } = new();
-        public List<Equipment> Equipment { get; } = new();
     }
 }
