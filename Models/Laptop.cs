@@ -17,5 +17,9 @@ namespace APBD_TASK2.Models
             this.ScreenSizeInch = screenSize;
         }
 
+        public override int Fee()
+        {
+            return 5;
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace APBD_TASK2.Models
         public string Description { get; set; } = null!;
         public EquipmentStatus Status { get; set; }
         public DateTime DateAdded { get; set; }
+        public abstract int Fee();
         
         public Equipment(string name, string description = "")
         {

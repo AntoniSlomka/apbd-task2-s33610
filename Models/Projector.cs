@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace APBD_TASK2.Models
 {
@@ -19,5 +18,9 @@ namespace APBD_TASK2.Models
             this.Resolution = resolution;
         }
 
+        public override int Fee()
+        {
+            return 3;
+        }
     }
 }

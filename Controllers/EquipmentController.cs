@@ -10,16 +10,9 @@ namespace APBD_TASK2.Controllers
 {
     public class EquipmentController
     {
-        public Singleton DataBase = null!;
-
-        public EquipmentController(Singleton dataBase)
-        {
-            DataBase = dataBase;
-        }
-
         public void addEquipment(Equipment equipment)
         {
-            Database.Singleton.Instance.EquipmentList.Add(equipment);
+            Singleton.Instance.EquipmentList.Add(equipment);
         }
         
     }

@@ -19,5 +19,9 @@ namespace APBD_TASK2.Models
             this.recordingCapabilities = recordingCapabilities;
         }
 
+        public override int Fee()
+        {
+            return 3;
+        }
     }
 }

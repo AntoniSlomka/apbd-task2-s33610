@@ -15,7 +15,6 @@ namespace APBD_TASK2.Models
         public string Surname { get; set; } = null!;
         public string Email { get; set; } = null!;
         public UserType Type { get; set; }
-
         public int MaxRentalLimit => Type switch
         {
             UserType.Student => 2,
