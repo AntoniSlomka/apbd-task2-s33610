@@ -8,6 +8,8 @@ namespace APBD_TASK2.Models
 {
     public class RentedItem
     {
+        private static int _nextId = 1;
+        public int Id { get; }
         public Equipment Equipment { get; } = null!;
         public User User { get; } = null!;
         public DateTime RentDate { get; }
@@ -16,6 +18,7 @@ namespace APBD_TASK2.Models
 
         public RentedItem(Equipment equipment, User user, DateTime rentDate, int rentPeriod, DateTime? returnDate)
         {
+            this.Id = _nextId++;    
             Equipment = equipment;
             User = user;
             RentDate = rentDate;

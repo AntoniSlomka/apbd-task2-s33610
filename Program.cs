@@ -11,7 +11,8 @@ namespace APBD_TASK2
         {
 
             var db = Singleton.Instance;
-            EquipmentController.AddEquipment(new Camera("NIKON D5100", "Digital SLR-Camera", 16, true));
+            Equipment camera1 = new Camera("NIKON D5100", "Digital SLR-Camera", 16, true);
+            EquipmentController.AddEquipment(camera1);
             EquipmentController.AddEquipment(new Camera("NIKON D850", "Digital full frame DSLR Camera", 45, true));
 
             EquipmentController.AddEquipment(new Laptop("ThinkPad T480s", "Lenovo Laptop", 16, 14));
@@ -20,12 +21,18 @@ namespace APBD_TASK2
             EquipmentController.AddEquipment(new Projector("SAMSUNG The Freestyle", "Portable projector", 230, "Full HD"));
             EquipmentController.AddEquipment(new Projector("JMGO N1S Ultimate", "Portable projector", 3300, "4K"));
 
-            UserController.AddUser(new User("Antoni", "Slomka", "s33610@pjwstk.edu.pl", Enum.UserType.Student));
+            User s1 = new User("Antoni", "Slomka", "s33610@pjwstk.edu.pl", Enum.UserType.Student);
+            UserController.AddUser(s1);
+
+            RentedItemController.AddRentedItem(new RentedItem(camera1, s1, new DateTime(2026,3,19), 5, null));
 
             //EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
             //EquipmentUserInterface.AddNewEquipment();
 
             UserClassUserInterface.DisplayUsers();
+
+            RentedItemUserInterface.DisplayActiveRentalsForUser();
+
         }
     }
 }

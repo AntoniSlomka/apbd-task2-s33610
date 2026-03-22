@@ -1,4 +1,5 @@
 ﻿using APBD_TASK2.Database;
+using APBD_TASK2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,5 @@ namespace APBD_TASK2.View
             }
         }
 
-        public static void DisplayActiveRentals()
-        {
-
-        }
     }
 }
