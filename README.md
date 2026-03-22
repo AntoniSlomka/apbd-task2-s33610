@@ -11,16 +11,17 @@ The application stores data about users, equipment and rented items and allows t
 Application can be interacted with through the following commands:
 - `help` - display the list of commands
 - `addUser` - Add new user
+- `viewusers` - Display the list of users
 - `addEq` / `addEquipment` - Add new Equipment
-- `displayEq` / `displayEquipment` - Display the full equipment list
-- `displayEq <status>` / `displayEquipment <status>` (status: `Avaiable`, `Rented`, `Unavaiable`) - Displays
-list of equipment that has the matching status
+- `viewEq` / `viewEquipment` - Display the full equipment list
+- `viewEqA` / `viewEquipmentA`- Displays list of equipment that has avaiable status
 - `rent` - Rent equipment to a user
 - `return` - Return the rented item
 - `mia` - Set equipment status to unavaiable (mia - missing in action)
-- `displayRentals` - Display rentals for the selected user
-- `displayOverDue` - Display all overdue rentals
+- `viewRentals` - Display rentals for the selected user
+- `viewOverDue` - Display all overdue rentals
 - `summary` - Generate a short summary of the rental system
+- `q` - To exit the application
 
 ## Implementation
 Classes in the Model directory represent different types of equipment, the item that has been rented
