@@ -22,7 +22,9 @@ namespace APBD_TASK2
             EquipmentController.AddEquipment(new Projector("JMGO N1S Ultimate", "Portable projector", 3300, "4K"));
 
             User s1 = new User("Antoni", "Slomka", "s33610@pjwstk.edu.pl", Enum.UserType.Student);
+            User l1 = new User("John", "Smith", "jsmith@pjwstk.edu.pl", Enum.UserType.Employee);
             UserController.AddUser(s1);
+            UserController.AddUser(l1);
 
             RentedItemController.AddRentedItem(new RentedItem(camera1, s1, new DateTime(2026,3,12), 5, null));
 
@@ -33,12 +35,17 @@ namespace APBD_TASK2
 
             EquipmentUI.DisplayEquipment();
 
-            RentedItemUI.AddNewRental();
-            RentedItemUI.AddNewRental();
+            EquipmentUI.MakeEquipmentUnavailable();
 
-            //EquipmentUI.DisplayEquipment();
+            EquipmentUI.DisplayEquipment();
 
-            RentedItemUI.DisplayActiveRentalsForUser();
+
+            //RentedItemUI.AddNewRental();
+            //RentedItemUI.AddNewRental();
+
+            ////EquipmentUI.DisplayEquipment();
+
+            //RentedItemUI.DisplayActiveRentalsForUser();
 
         }
     }

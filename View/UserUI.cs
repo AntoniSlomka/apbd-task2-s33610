@@ -1,4 +1,6 @@
-﻿using APBD_TASK2.Database;
+﻿using APBD_TASK2.Controllers;
+using APBD_TASK2.Database;
+using APBD_TASK2.Enum;
 using APBD_TASK2.Models;
 using System;
 using System.Collections.Generic;
@@ -20,10 +22,26 @@ namespace APBD_TASK2.View
             }
         }
 
-        public static void CalculateFeeForUser()
+        public static void AddNewUser()
         {
-            Console.WriteLine("Enter User ID");
-            Console.WriteLine("");
+            Console.WriteLine("Adding new User");
+            Console.WriteLine("Enter user's first name: ");
+            String name = Console.ReadLine();
+            Console.WriteLine("Enter user's last name: ");
+            String surname = Console.ReadLine();
+            Console.WriteLine("Enter user's email: ");
+            String email = Console.ReadLine();
+            Console.WriteLine("Enter user type (S - Student, E - Employee): ");
+            String typeInput = Console.ReadLine();
+            UserType type = new UserType();
+            switch (typeInput.ToLower())
+            {
+                case "s": type = UserType.Student; break;
+                case "e": type = UserType.Employee; break;
+                default: Console.WriteLine("Incorrect user type"); return;
+            }
+
+            UserController.AddUser(new User(name, surname, email, type));
         }
 
     }

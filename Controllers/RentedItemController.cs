@@ -51,6 +51,8 @@ namespace APBD_TASK2.Controllers
 
         public static void ReturnRentedItem(RentedItem item)
         {
+            item.ReturnDate = DateTime.Now;
+            item.Equipment.Status = Enum.EquipmentStatus.Available;
 
         }
     }

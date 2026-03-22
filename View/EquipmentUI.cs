@@ -7,6 +7,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace APBD_TASK2.View
@@ -17,7 +18,7 @@ namespace APBD_TASK2.View
         public static void DisplayEquipment()
         {
             Console.WriteLine("Equipment List");
-            Console.WriteLine($"{"ID",-3} | {"Name",-25}| {"Status",-10}| {"Description",-15}| Specs");
+            Console.WriteLine($"{"ID",-3} | {"Name",-25}| {"Status",-15}| {"Description",-15}| Specs");
             foreach (var item in Singleton.Instance.EquipmentList)
             {
                 Console.WriteLine(FormatItemDisplay(item));
@@ -26,13 +27,13 @@ namespace APBD_TASK2.View
 
         public static String FormatItemDisplay(Equipment item)
         {
-            return $"{item.Id,-3} | {item.Name,-25}| {item.Status.ToString(),-10}| {item.Description,-15}| {item.SpecsDetails()}";
+            return $"{item.Id,-3} | {item.Name,-25}| {item.Status.ToString(),-15}| {item.Description,-15}| {item.SpecsDetails()}";
         }
 
         public static void DisplayEquipmentByStatus(EquipmentStatus status = EquipmentStatus.Available)
         {
             Console.WriteLine($"{status.ToString()} Equipment List");
-            Console.WriteLine($"{"ID",-3} | {"Name",-25}| {"Status",-10}| {"Description",-15}| Specs");
+            Console.WriteLine($"{"ID",-3} | {"Name",-25}| {"Status",-15}| {"Description",-15}| Specs");
             var count = 0;
             foreach (var item in Singleton.Instance.EquipmentList)
             {
@@ -46,6 +47,16 @@ namespace APBD_TASK2.View
             {
                 Console.WriteLine("None");
             }
+        }
+
+        public static void MakeEquipmentUnavailable()
+        {
+            Console.WriteLine("Enter equipment ID: ");
+            int EquipmentId = int.Parse(Console.ReadLine());
+            Equipment equipment = null;
+            if (EquipmentController.EquipmentIdExists(EquipmentId)) equipment = EquipmentController.EquipmentById(EquipmentId);
+            else return;
+            EquipmentController.MakeEquipmentUnavailable(equipment);
         }
 
         public static void AddNewEquipment()

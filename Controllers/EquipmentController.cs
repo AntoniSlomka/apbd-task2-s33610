@@ -38,5 +38,16 @@ namespace APBD_TASK2.Controllers
             return Singleton.Instance.EquipmentList.Any(x => x.Id == EquipmentId);
         }
 
+        public static void MakeEquipmentUnavailable(Equipment equipment)
+        {
+            if (equipment.Status != Enum.EquipmentStatus.Rented)
+            {
+                equipment.Status = Enum.EquipmentStatus.Unavailable;
+            } else
+            {
+                Console.WriteLine("Equipment is currently rented, cannot make it unavailable");
+            }
+        }
+
     }
 }
