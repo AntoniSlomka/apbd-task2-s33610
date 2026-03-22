@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace APBD_TASK2.View
 {
-    public static class UserClassUserInterface
+    public static class UserUI
     {
         public static void DisplayUsers()
         {
@@ -18,6 +18,12 @@ namespace APBD_TASK2.View
             {
                 Console.WriteLine($"{user.Id,-3} | {user.Name,-15}| {user.Surname,-15}| {user.Type,-15}| {user.Email,-15}");
             }
+        }
+
+        public static void CalculateFeeForUser()
+        {
+            Console.WriteLine("Enter User ID");
+            Console.WriteLine("");
         }
 
     }

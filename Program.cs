@@ -24,14 +24,21 @@ namespace APBD_TASK2
             User s1 = new User("Antoni", "Slomka", "s33610@pjwstk.edu.pl", Enum.UserType.Student);
             UserController.AddUser(s1);
 
-            RentedItemController.AddRentedItem(new RentedItem(camera1, s1, new DateTime(2026,3,19), 5, null));
+            RentedItemController.AddRentedItem(new RentedItem(camera1, s1, new DateTime(2026,3,12), 5, null));
 
             //EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
             //EquipmentUserInterface.AddNewEquipment();
 
-            UserClassUserInterface.DisplayUsers();
+            UserUI.DisplayUsers();
 
-            RentedItemUserInterface.DisplayActiveRentalsForUser();
+            EquipmentUI.DisplayEquipment();
+
+            RentedItemUI.AddNewRental();
+            RentedItemUI.AddNewRental();
+
+            //EquipmentUI.DisplayEquipment();
+
+            RentedItemUI.DisplayActiveRentalsForUser();
 
         }
     }

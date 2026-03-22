@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace APBD_TASK2.View
 {
-    public static class EquipmentUserInterface
+    public static class EquipmentUI
     {
         public static List<String> EquipmentTypes = new List<String>(["Camera", "Laptop", "Projector"]);
         public static void DisplayEquipment()

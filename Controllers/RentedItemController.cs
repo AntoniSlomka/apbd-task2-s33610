@@ -1,5 +1,6 @@
 ﻿using APBD_TASK2.Database;
 using APBD_TASK2.Models;
+using APBD_TASK2.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,46 @@ namespace APBD_TASK2.Controllers
     public static class RentedItemController
     {
         public static void AddRentedItem(RentedItem rentedItem)
+        {      
+            if (UserController.RentalLimitReached(rentedItem.User.Id))
+            {
+                Console.WriteLine($"This user has reached their rental limit: {UserController.GetActiveRentals(rentedItem.User.Id)}");
+                return;
+            }
+
+            if (rentedItem.Equipment.Status != Enum.EquipmentStatus.Available)
+            {
+                Console.WriteLine($"This equipment is not avaiable for renting, status: {rentedItem.Equipment.Status}");
+                return;
+            }
+            Singleton.Instance.RentedItems.Add(rentedItem);
+            rentedItem.Equipment.Status = Enum.EquipmentStatus.Rented;
+        }
+
+        public static int GetFeeForRentedItem(RentedItem item)
         {
-            if (!Singleton.Instance.UserList.Contains(rentedItem.User))
+            int fee = 0;
+            DateTime dueDate = item.RentDate.AddDays(item.RentPeriod);
+            if (dueDate < DateTime.Now)
             {
-                throw new Exception("No matching user found in the database");
+                if (item.ReturnDate != null)
+                {
+                    DateTime returnedOn = (DateTime)item.ReturnDate;
+                    int dayDiff = ((int)returnedOn.Subtract(dueDate).TotalDays);
+                    fee += item.Equipment.Fee() * dayDiff;
+                }
+                else
+                {
+                    int dayDiff = ((int)DateTime.Now.Subtract(dueDate).TotalDays);
+                    fee += item.Equipment.Fee() * dayDiff;
+                }
             }
-            if (!Singleton.Instance.EquipmentList.Contains(rentedItem.Equipment))
-            {
-                throw new Exception("No matching equipment found in the database");
-            }
-            
-            if (rentedItem.Equipment.Status == Enum.EquipmentStatus.Available
-                && !UserController.RentalLimitReached(rentedItem.User.Id))
-            {
-                Singleton.Instance.RentedItems.Add(rentedItem);
-                rentedItem.Equipment.Status = Enum.EquipmentStatus.Rented;
-            }
+            return fee;
+        }
+
+        public static void ReturnRentedItem(RentedItem item)
+        {
+
         }
     }
 }

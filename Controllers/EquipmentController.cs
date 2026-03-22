@@ -14,6 +14,29 @@ namespace APBD_TASK2.Controllers
         {
             Singleton.Instance.EquipmentList.Add(equipment);
         }
-        
+
+        public static Equipment EquipmentById(int EquipmentId)
+        {
+            if (EquipmentIdExists(EquipmentId))
+            {
+                Equipment? equipment = Singleton.Instance.EquipmentList.FirstOrDefault(x =>
+                {
+                    return x.Id == EquipmentId;
+                });
+                return equipment;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Equipment ID");
+                return null;
+            }
+            
+        }
+
+        public static bool EquipmentIdExists(int EquipmentId)
+        {
+            return Singleton.Instance.EquipmentList.Any(x => x.Id == EquipmentId);
+        }
+
     }
 }

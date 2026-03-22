@@ -1,0 +1,62 @@
+﻿using APBD_TASK2.Controllers;
+using APBD_TASK2.Database;
+using APBD_TASK2.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace APBD_TASK2.View
+{
+    public static class RentedItemUI
+    {
+        public static void DisplayActiveRentalsForUser()
+        {
+            Console.WriteLine("Enter User ID: ");
+            int userId = int.Parse(Console.ReadLine());
+            User? user = Singleton.Instance.UserList.FirstOrDefault(x =>
+            {
+                return x.Id == userId;
+            });
+            if (user == null)
+            {
+                Console.WriteLine("Invalid User Id!");
+                return;
+            }
+            Console.WriteLine($"Rented Items for UserId {1}:");
+            Console.WriteLine($"{"ID",-3} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on", -17} | Fee");
+            var items = Singleton.Instance.RentedItems.FindAll(x => { return x.User == user; });
+            if (items.Count == 0 ) Console.WriteLine("None");
+            foreach (var item in items)
+            {
+                Console.WriteLine(FormatRental(item));
+            }
+            
+        }
+
+        public static void AddNewRental()
+        {
+            Console.WriteLine("Creating new Rental");
+            Console.WriteLine("Enter User ID: ");
+            int userId = int.Parse(Console.ReadLine());
+            User? user = UserController.UserById(userId);
+            if (user == null) return;
+            Console.WriteLine("Enter Equipment ID: ");
+            int equipmentId = int.Parse(Console.ReadLine());
+            Equipment? equipment = EquipmentController.EquipmentById(equipmentId);
+            if (equipment == null) return;
+            Console.WriteLine("Enter rent period: ");
+            int rentPeriod = int.Parse(Console.ReadLine());
+            RentedItemController.AddRentedItem(new RentedItem(equipment, user, DateTime.Now, rentPeriod, null));
+        }
+
+        public static String FormatRental(RentedItem item)
+        {
+            return $"{item.Id,-3} | {item.Equipment.Name,-25}| {item.RentDate.ToShortDateString(),-10} -"
+                + $" {item.RentDate.AddDays(item.RentPeriod).ToShortDateString(),10} |"
+                + $" {(item.ReturnDate != null ? item.ReturnDate : "not returned yet"), -17} |"
+                + $" {(item.FeePaid ? ($"Paid: " + RentedItemController.GetFeeForRentedItem(item)) : RentedItemController.GetFeeForRentedItem(item))}";
+        }
+    }
+}

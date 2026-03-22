@@ -21,22 +21,24 @@ namespace APBD_TASK2.Controllers
             int count = 0;
             foreach (RentedItem item in Singleton.Instance.RentedItems)
             {
-                if (item.User.Id == UserId) count++;
+                if (item.User.Id == UserId && item.ReturnDate == null) count++;
             }
 
             return count;
         }
 
 
-        public static int CalculateFee(int UserId)
+        public static int CalculateTotalFee(int UserId)
         {
             User user = UserById(UserId);
             int fee = 0;
             foreach (RentedItem item in Singleton.Instance.RentedItems)
             {
-                DateTime endDate = item.RentDate.AddDays(item.RentPeriod);
-                int dayDiff = ((int)DateTime.Now.Subtract(endDate).TotalDays);
-                if (item.User.Id == UserId && DateTime.Now > endDate) fee += item.Equipment.Fee() * dayDiff;
+                DateTime dueDate = item.RentDate.AddDays(item.RentPeriod);
+                if (item.User.Id == UserId && !item.FeePaid && dueDate > DateTime.Now)
+                {
+                    fee += RentedItemController.GetFeeForRentedItem(item);
+                }
             }
             return fee;
         }
@@ -50,15 +52,23 @@ namespace APBD_TASK2.Controllers
 
         public static User UserById(int UserId)
         {
-            User? user = Singleton.Instance.UserList.FirstOrDefault(x =>
+            if (UserIdExists(UserId))
             {
-                return x.Id == UserId;
-            });
-            if (user == null)
+                User user = Singleton.Instance.UserList.FirstOrDefault(x =>
+                {
+                    return x.Id == UserId;
+                });
+                return user;
+            } else
             {
-                throw new Exception("No user with this Id found");
-            }
-            return user;
+                Console.WriteLine("Invalid User ID");
+                return null;
+            }            
+        }
+
+        public static bool UserIdExists(int UserId)
+        {
+            return Singleton.Instance.UserList.Any(x => x.Id == UserId);
         }
     }
 }
