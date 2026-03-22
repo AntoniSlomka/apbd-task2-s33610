@@ -7,6 +7,24 @@ namespace APBD_TASK2
 {
     class Program
     {
+        public static void DisplayHelp()
+        {
+            Console.WriteLine("""
+                > help - display the list of commands
+                > addUser - Add new user
+                > viewusers - Display the list of users
+                > addEq / addEquipment - Add new Equipment
+                > viewEq / viewEquipment - Display the full equipment list
+                > viewEqA / viewEquipmentA- Displays list of equipment that has avaiable status
+                > rent - Rent equipment to a user
+                > return - Return the rented item
+                > mia - Set equipment status to unavaiable
+                > viewRentals - Display rentals for the selected user
+                > viewOverDue - Display all overdue rentals
+                > summary - Generate a short summary of the rental system
+                > q - To exit the application
+                """);
+        }
         static void Main(string[] args)
         {
             //Sample data
@@ -49,6 +67,29 @@ namespace APBD_TASK2
             //////EquipmentUI.DisplayEquipment();
 
             ////RentedItemUI.DisplayActiveRentalsForUser();
+            ///
+            //Welcome message
+            Console.WriteLine("Welcome to the Rental Service! Type help to display the list of commands.");
+            String line = "";
+            while ((line = Console.ReadLine()) != "q")
+            {
+                switch (line.ToLower())
+                {
+                    case "help": DisplayHelp(); break;
+                    case "adduser": UserUI.AddNewUser(); break;
+                    case "viewusers": UserUI.DisplayUsers(); break;
+                    case "addeq": case "addequipment": EquipmentUI.AddNewEquipment(); break;
+                    case "vieweq": case "viewequipment": EquipmentUI.DisplayEquipment(); break;
+                    case "vieweqa": case "viewequipmenta": EquipmentUI.DisplayEquipmentByStatus(); break;
+                    case "rent": RentedItemUI.AddNewRental(); break;
+                    case "return": RentedItemUI.ReturnRental(); break;
+                    case "mia": EquipmentUI.MakeEquipmentUnavailable(); break;
+                    case "viewrentals": RentedItemUI.DisplayActiveRentalsForUser(); break;
+                    case "viewoverdue": RentedItemUI.DisplayAllOverdueRentals(); break;
+                    case "summary": Console.WriteLine(); break;
+                    default: break;
+                }
+            }
 
         }
     }

@@ -51,6 +51,20 @@ namespace APBD_TASK2.View
             RentedItemController.AddRentedItem(new RentedItem(equipment, user, DateTime.Now, rentPeriod, null));
         }
 
+        public static void ReturnRental()
+        {
+            Console.WriteLine("Enter rental ID: ");
+            int rentalId = int.Parse(Console.ReadLine());
+            if (!Singleton.Instance.RentedItems.Any(x => x.Id == rentalId))
+            {
+                Console.WriteLine("Invalid rental ID");
+                return;
+            }
+            RentedItem rentedItem = Singleton.Instance.RentedItems.FirstOrDefault(x => x.Id == rentalId);
+            RentedItemController.ReturnRentedItem(rentedItem);
+
+        }
+
         public static String FormatRental(RentedItem item)
         {
             return $"{item.Id,-3} | {item.Equipment.Name,-25}| {item.RentDate.ToShortDateString(),-10} -"
@@ -59,7 +73,7 @@ namespace APBD_TASK2.View
                 + $" {(item.FeePaid ? ($"Paid: " + RentedItemController.GetFeeForRentedItem(item)) : RentedItemController.GetFeeForRentedItem(item))}";
         }
 
-        public static void ShowAllOverdueRentals()
+        public static void DisplayAllOverdueRentals()
         {
             Console.WriteLine("Overdue rentals: ");
             Console.WriteLine($"{"ID",-3} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on",-17} | Fee");
