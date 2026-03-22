@@ -25,7 +25,7 @@ namespace APBD_TASK2.View
                 return;
             }
             Console.WriteLine($"Rented Items for UserId {1}:");
-            Console.WriteLine($"{"ID",-3} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on", -17} | Fee");
+            Console.WriteLine($"{"ID",-3} | {"UserId",-6} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on", -17} | Fee");
             var items = Singleton.Instance.RentedItems.FindAll(x => { return x.User == user; });
             if (items.Count == 0 ) Console.WriteLine("None");
             foreach (var item in items)
@@ -67,7 +67,7 @@ namespace APBD_TASK2.View
 
         public static String FormatRental(RentedItem item)
         {
-            return $"{item.Id,-3} | {item.Equipment.Name,-25}| {item.RentDate.ToShortDateString(),-10} -"
+            return $"{item.Id,-3} | {item.User.Id, -6} | {item.Equipment.Name,-25}| {item.RentDate.ToShortDateString(),-10} -"
                 + $" {item.RentDate.AddDays(item.RentPeriod).ToShortDateString(),10} |"
                 + $" {(item.ReturnDate != null ? item.ReturnDate : "not returned yet"), -17} |"
                 + $" {(item.FeePaid ? ($"Paid: " + RentedItemController.GetFeeForRentedItem(item)) : RentedItemController.GetFeeForRentedItem(item))}";
@@ -76,7 +76,7 @@ namespace APBD_TASK2.View
         public static void DisplayAllOverdueRentals()
         {
             Console.WriteLine("Overdue rentals: ");
-            Console.WriteLine($"{"ID",-3} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on",-17} | Fee");
+            Console.WriteLine($"{"ID",-3} | {"UserId", -6} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on",-17} | Fee");
             int count = 0;
             foreach (var item in Singleton.Instance.RentedItems)
             {
@@ -89,5 +89,21 @@ namespace APBD_TASK2.View
             }
             if (count == 0) Console.WriteLine("None");
         }
+
+        public static void DisplaySystemSummary()
+        {
+            Console.WriteLine("Summary: ");
+            Console.WriteLine($"Total users count: {Singleton.Instance.UserList.Count()}");
+            Console.WriteLine($"Total equipment count: {Singleton.Instance.EquipmentList.Count()}");
+            Console.WriteLine($"Total rental count: {Singleton.Instance.RentedItems.Count()}");
+            int unreturnedCount = Singleton.Instance.EquipmentList.Count(x => x.Status != Enum.EquipmentStatus.Available);
+            Console.WriteLine($"Number of un-returned rentals: {unreturnedCount}");
+            int overdueUserCount = Singleton.Instance.UserList.Count(x => {return UserController.CalculateTotalFee(x.Id) != 0;});
+            Console.WriteLine($"Number of users with overdue fee: {overdueUserCount}");
+            int totalFee = Singleton.Instance.UserList.Sum(x => { return UserController.CalculateTotalFee(x.Id);});
+            Console.WriteLine($"Total value of overdue fee of all users: {totalFee}");
+        }
     }
+
+
 }

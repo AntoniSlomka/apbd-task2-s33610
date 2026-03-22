@@ -86,7 +86,7 @@ namespace APBD_TASK2
                     case "mia": EquipmentUI.MakeEquipmentUnavailable(); break;
                     case "viewrentals": RentedItemUI.DisplayActiveRentalsForUser(); break;
                     case "viewoverdue": RentedItemUI.DisplayAllOverdueRentals(); break;
-                    case "summary": Console.WriteLine(); break;
+                    case "summary": RentedItemUI.DisplaySystemSummary(); break;
                     default: break;
                 }
             }

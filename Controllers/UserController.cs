@@ -35,7 +35,7 @@ namespace APBD_TASK2.Controllers
             foreach (RentedItem item in Singleton.Instance.RentedItems)
             {
                 DateTime dueDate = item.RentDate.AddDays(item.RentPeriod);
-                if (item.User.Id == UserId && !item.FeePaid && dueDate > DateTime.Now)
+                if (item.User.Id == UserId && dueDate < DateTime.Now)
                 {
                     fee += RentedItemController.GetFeeForRentedItem(item);
                 }
