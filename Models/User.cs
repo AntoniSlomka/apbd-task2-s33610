@@ -24,6 +24,7 @@ namespace APBD_TASK2.Models
 
         public User(string name, string surname, string email, UserType type)
         {
+            this.Id = _nextId++;
             this.Name = name;
             this.Surname = surname;
             this.Email = email;

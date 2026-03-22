@@ -21,5 +21,10 @@ namespace APBD_TASK2.Models
         {
             return 5;
         }
+
+        public override string SpecsDetails()
+        {
+            return $"RAM: {RamGB}GB, Screen size: {ScreenSizeInch}in";
+        }
     }
 }

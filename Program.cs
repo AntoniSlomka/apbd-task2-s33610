@@ -20,8 +20,12 @@ namespace APBD_TASK2
             EquipmentController.AddEquipment(new Projector("SAMSUNG The Freestyle", "Portable projector", 230, "Full HD"));
             EquipmentController.AddEquipment(new Projector("JMGO N1S Ultimate", "Portable projector", 3300, "4K"));
 
-            EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
-            EquipmentUserInterface.AddNewEquipment();
+            UserController.AddUser(new User("Antoni", "Slomka", "s33610@pjwstk.edu.pl", Enum.UserType.Student));
+
+            //EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
+            //EquipmentUserInterface.AddNewEquipment();
+
+            UserClassUserInterface.DisplayUsers();
         }
     }
 }

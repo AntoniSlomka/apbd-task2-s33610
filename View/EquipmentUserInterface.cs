@@ -17,23 +17,28 @@ namespace APBD_TASK2.View
         public static void DisplayEquipment()
         {
             Console.WriteLine("Equipment List");
-            Console.WriteLine($"{"ID",-3} | {"Name",-25}| {"Status",-10}");
+            Console.WriteLine($"{"ID",-3} | {"Name",-25}| {"Status",-10}| {"Description",-15}| Specs");
             foreach (var item in Singleton.Instance.EquipmentList)
             {
-                Console.WriteLine($"{item.Id, -3} | {item.Name,-25}| {item.Status.ToString(),-10}");
+                Console.WriteLine(FormatItemDisplay(item));
             }
+        }
+
+        public static String FormatItemDisplay(Equipment item)
+        {
+            return $"{item.Id,-3} | {item.Name,-25}| {item.Status.ToString(),-10}| {item.Description,-15}| {item.SpecsDetails()}";
         }
 
         public static void DisplayEquipmentByStatus(EquipmentStatus status = EquipmentStatus.Available)
         {
             Console.WriteLine($"{status.ToString()} Equipment List");
-            Console.WriteLine($"{"ID",-3} | {"Name",-25}| {"Status",-10}");
+            Console.WriteLine($"{"ID",-3} | {"Name",-25}| {"Status",-10}| {"Description",-15}| Specs");
             var count = 0;
             foreach (var item in Singleton.Instance.EquipmentList)
             {
                 if (item.Status == status)
                 {
-                    Console.WriteLine($"{item.Id,-3} | {item.Name,-25}| {item.Status.ToString(),-10}");
+                    Console.WriteLine(FormatItemDisplay(item));
                     count++;
                 }
             }

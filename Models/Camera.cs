@@ -23,5 +23,10 @@ namespace APBD_TASK2.Models
         {
             return 3;
         }
+
+        public override string SpecsDetails()
+        {
+            return $"Resolution: {ResolutionMP}MP, Has recording capabilities: {recordingCapabilities}";
+        }
     }
 }
