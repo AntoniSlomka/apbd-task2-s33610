@@ -9,10 +9,10 @@ namespace APBD_TASK2.Models
     internal class Camera : Equipment
     {
 
-        public int ResolutionMP { get; set; }
+        public double ResolutionMP { get; set; }
         public bool recordingCapabilities { get; set; }
 
-        public Camera(string name, string description, int resolutionMP, bool recordingCapabilities) 
+        public Camera(string name, string description, double resolutionMP, bool recordingCapabilities) 
             : base(name, description = "Camera")
         {
             this.ResolutionMP = resolutionMP;

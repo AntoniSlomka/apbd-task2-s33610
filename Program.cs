@@ -1,6 +1,7 @@
 ﻿using APBD_TASK2.Controllers;
 using APBD_TASK2.Database;
 using APBD_TASK2.Models;
+using APBD_TASK2.View;
 
 namespace APBD_TASK2
 {
@@ -19,7 +20,8 @@ namespace APBD_TASK2
             EquipmentController.AddEquipment(new Projector("SAMSUNG The Freestyle", "Portable projector", 230, "Full HD"));
             EquipmentController.AddEquipment(new Projector("JMGO N1S Ultimate", "Portable projector", 3300, "4K"));
 
-            
+            EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
+            EquipmentUserInterface.AddNewEquipment();
         }
     }
 }
