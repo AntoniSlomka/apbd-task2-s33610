@@ -9,9 +9,9 @@ namespace APBD_TASK2.Models
     internal class Laptop : Equipment
     {
         public int RamGB { get; set; }
-        public int ScreenSizeInch {  get; }
+        public double ScreenSizeInch {  get; }
         
-        public Laptop(string name, string description, int ramGB, int screenSize) : base (name, description = "Laptop") 
+        public Laptop(string name, string description, int ramGB, double screenSize) : base (name, description = "Laptop") 
         {
             this.RamGB = ramGB;
             this.ScreenSizeInch = screenSize;
