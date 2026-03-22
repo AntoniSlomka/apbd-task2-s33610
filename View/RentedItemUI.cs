@@ -58,5 +58,22 @@ namespace APBD_TASK2.View
                 + $" {(item.ReturnDate != null ? item.ReturnDate : "not returned yet"), -17} |"
                 + $" {(item.FeePaid ? ($"Paid: " + RentedItemController.GetFeeForRentedItem(item)) : RentedItemController.GetFeeForRentedItem(item))}";
         }
+
+        public static void ShowAllOverdueRentals()
+        {
+            Console.WriteLine("Overdue rentals: ");
+            Console.WriteLine($"{"ID",-3} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on",-17} | Fee");
+            int count = 0;
+            foreach (var item in Singleton.Instance.RentedItems)
+            {
+                DateTime dueDate = item.RentDate.AddDays(item.RentPeriod);
+                if (DateTime.Now > dueDate)
+                {
+                    Console.WriteLine(FormatRental(item));
+                    count++;
+                }
+            }
+            if (count == 0) Console.WriteLine("None");
+        }
     }
 }

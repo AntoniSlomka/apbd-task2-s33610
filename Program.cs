@@ -9,7 +9,8 @@ namespace APBD_TASK2
     {
         static void Main(string[] args)
         {
-
+            //Sample data
+            //==============================
             var db = Singleton.Instance;
             Equipment camera1 = new Camera("NIKON D5100", "Digital SLR-Camera", 16, true);
             EquipmentController.AddEquipment(camera1);
@@ -27,25 +28,27 @@ namespace APBD_TASK2
             UserController.AddUser(l1);
 
             RentedItemController.AddRentedItem(new RentedItem(camera1, s1, new DateTime(2026,3,12), 5, null));
+            //==============================
+            ////EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
+            ////EquipmentUserInterface.AddNewEquipment();
 
-            //EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
-            //EquipmentUserInterface.AddNewEquipment();
+            //UserUI.DisplayUsers();
 
-            UserUI.DisplayUsers();
+            //EquipmentUI.DisplayEquipment();
 
-            EquipmentUI.DisplayEquipment();
+            //EquipmentUI.MakeEquipmentUnavailable();
 
-            EquipmentUI.MakeEquipmentUnavailable();
+            //EquipmentUI.DisplayEquipment();
 
-            EquipmentUI.DisplayEquipment();
+            //RentedItemUI.ShowAllOverdueRentals();
 
 
-            //RentedItemUI.AddNewRental();
-            //RentedItemUI.AddNewRental();
+            ////RentedItemUI.AddNewRental();
+            ////RentedItemUI.AddNewRental();
 
-            ////EquipmentUI.DisplayEquipment();
+            //////EquipmentUI.DisplayEquipment();
 
-            //RentedItemUI.DisplayActiveRentalsForUser();
+            ////RentedItemUI.DisplayActiveRentalsForUser();
 
         }
     }
