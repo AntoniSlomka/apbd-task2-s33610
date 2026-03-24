@@ -31,8 +31,9 @@ namespace APBD_TASK2
             //==============================
             var db = Singleton.Instance;
             Equipment camera1 = new Camera("NIKON D5100", "Digital SLR-Camera", 16, true);
+            Equipment camera2 = new Camera("NIKON D850", "Digital full frame DSLR Camera", 45, true);
             EquipmentController.AddEquipment(camera1);
-            EquipmentController.AddEquipment(new Camera("NIKON D850", "Digital full frame DSLR Camera", 45, true));
+            EquipmentController.AddEquipment(camera2);
 
             EquipmentController.AddEquipment(new Laptop("ThinkPad T480s", "Lenovo Laptop", 16, 14));
             EquipmentController.AddEquipment(new Laptop("HP 15", "Ryzen 7 5825U", 16, 15.6));
@@ -45,29 +46,44 @@ namespace APBD_TASK2
             UserController.AddUser(s1);
             UserController.AddUser(l1);
 
-            RentedItemController.AddRentedItem(new RentedItem(camera1, s1, new DateTime(2026,3,12), 5, null));
-            //==============================
-            ////EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
-            ////EquipmentUserInterface.AddNewEquipment();
 
-            //UserUI.DisplayUsers();
+            RentedItem r1 = new RentedItem(camera1, s1, new DateTime(2026, 3, 12), 5, null);
+            RentedItem r2 = new RentedItem(camera2, s1, new DateTime(2026, 3, 20), 7, null);
+            RentedItemController.AddRentedItem(r1);
+            RentedItemController.AddRentedItem(r2);
 
-            //EquipmentUI.DisplayEquipment();
+            RentedItemController.ReturnRentedItem(r1);
 
-            //EquipmentUI.MakeEquipmentUnavailable();
+            RentedItemController.ReturnRentedItem(r2);
 
-            //EquipmentUI.DisplayEquipment();
+            RentedItemUI.DisplayAllOverdueRentals();
 
-            //RentedItemUI.ShowAllOverdueRentals();
+            //Invalid operation
+            RentedItemController.ReturnRentedItem(r1);
+
+            RentedItemUI.DisplaySystemSummary();
+
+            /*//EquipmentUserInterface.DisplayEquipmentByStatus(Enum.EquipmentStatus.Available);
+            //EquipmentUserInterface.AddNewEquipment();
+
+            UserUI.DisplayUsers();
+
+            EquipmentUI.DisplayEquipment();
+
+            EquipmentUI.MakeEquipmentUnavailable();
+
+            EquipmentUI.DisplayEquipment();
+
+            RentedItemUI.ShowAllOverdueRentals();
 
 
-            ////RentedItemUI.AddNewRental();
-            ////RentedItemUI.AddNewRental();
+            //RentedItemUI.AddNewRental();
+            //RentedItemUI.AddNewRental();
 
-            //////EquipmentUI.DisplayEquipment();
+            ////EquipmentUI.DisplayEquipment();
 
-            ////RentedItemUI.DisplayActiveRentalsForUser();
-            ///
+            //RentedItemUI.DisplayActiveRentalsForUser();
+            /*/
             //Welcome message
             Console.WriteLine("Welcome to the Rental Service! Type help to display the list of commands.");
             String line = "";

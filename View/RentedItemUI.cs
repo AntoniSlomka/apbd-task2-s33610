@@ -69,14 +69,14 @@ namespace APBD_TASK2.View
         {
             return $"{item.Id,-3} | {item.User.Id, -6} | {item.Equipment.Name,-25}| {item.RentDate.ToShortDateString(),-10} -"
                 + $" {item.RentDate.AddDays(item.RentPeriod).ToShortDateString(),10} |"
-                + $" {(item.ReturnDate != null ? item.ReturnDate : "not returned yet"), -17} |"
+                + $" {(item.ReturnDate != null ? item.ReturnDate : "not returned yet"), -20} |"
                 + $" {(item.FeePaid ? ($"Paid: " + RentedItemController.GetFeeForRentedItem(item)) : RentedItemController.GetFeeForRentedItem(item))}";
         }
 
         public static void DisplayAllOverdueRentals()
         {
             Console.WriteLine("Overdue rentals: ");
-            Console.WriteLine($"{"ID",-3} | {"UserId", -6} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on",-17} | Fee");
+            Console.WriteLine($"{"ID",-3} | {"UserId", -6} | {"Equipment",-25}| {"Rent Date",-10} - {"Due Date",10} | {"Returned on",-20} | Fee");
             int count = 0;
             foreach (var item in Singleton.Instance.RentedItems)
             {
